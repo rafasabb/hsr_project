@@ -20,6 +20,10 @@ export interface Relic {
   subStats: Stat[];
 }
 
+export type SubStatRanges = {
+    [key: string]: { min: number; max: number };
+  };
+
 // Character types
 export interface Character {
   id: string;

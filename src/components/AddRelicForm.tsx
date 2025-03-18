@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FiInfo } from 'react-icons/fi';
 import { useStore } from '../store/StoreContext';
-import { Relic, RelicType, Stat } from '../types';
+import { Relic, RelicType, Stat, SubStatRanges } from '../types';
 import relicData from '../data/relicData.json';
-
-type SubStatRanges = {
-  [key: string]: { min: number; max: number };
-};
 
 const { relicTypes, relicSets, ornamentSets, allStats, mainStatValues, subStatRanges } = relicData as {
   relicTypes: string[];
@@ -217,8 +213,6 @@ export default function AddRelicForm() {
       mainStat: mainStat,
       subStats: validSubStats
     };
-    
-    console.log(newRelic);
     
     addRelic(newRelic);
     

@@ -1,0 +1,146 @@
+{
+    "Characters":[
+        {
+            "Name":"Acheron",
+            "Stats":[
+                {
+                    "Name":"HP",
+                    "Value":1125
+                },
+                {
+                    "Name":"ATK",
+                    "Value":698
+                },
+                {
+                    "Name":"DEF",
+                    "Value":436
+                },
+                {
+                    "Name":"Speed",
+                    "Value":101
+                }
+                ],
+            "Traces":[
+                {
+                    "Name":"ATK%",
+                    "Value":28
+                },
+                {
+                    "Name":"Lightning DMG",
+                    "Value":8
+                },
+                {
+                    "Name":"Crit DMG%",
+                    "Value":24
+                }
+            ],
+            "Heights":[
+                {
+                    "Name":"ATK%",
+                    "Value":0.75
+                },
+                {
+                    "Name":"SPD",
+                    "Value":1
+                },
+                {
+                    "Name":"Crit Rate%",
+                    "Value":1
+                },
+                {
+                    "Name":"Crit DMG%",
+                    "Value":1
+                },
+                {
+                    "Name":"Lightning DMG",
+                    "Value":1
+                }
+            ],
+            "MainStats":[
+                {
+                    "Chest": ["Crit DMG%", "Crit Rate%", "ATK%"],
+                    "Feet": ["SPD", "ATK%"],
+                    "Orb": ["Lightning DMG", "ATK%"],
+                    "Rope": ["ATK%"]
+                }
+            ],
+            "Sets":[
+                {
+                    "Relic": "pdw",
+                    "Planar": "igt"
+                }
+            ]
+        },
+        {
+            "Name":"Acheron",
+            "Stats":[
+                {
+                    "Name":"HP",
+                    "Value":1241
+                },
+                {
+                    "Name":"ATK",
+                    "Value":698
+                },
+                {
+                    "Name":"DEF",
+                    "Value":485
+                },
+                {
+                    "Name":"Speed",
+                    "Value":102
+                }
+                ],
+            "Traces":[
+                {
+                    "Name":"DEF%",
+                    "Value":12.5
+                },
+                {
+                    "Name":"Lightning DMG",
+                    "Value":22.4
+                },
+                {
+                    "Name":"Crit Rate%",
+                    "Value":12
+                }
+            ],
+            "Heights":[
+                {
+                    "Name":"ATK%",
+                    "Value":0.75
+                },
+                {
+                    "Name":"SPD",
+                    "Value":1
+                },
+                {
+                    "Name":"Crit Rate%",
+                    "Value":1
+                },
+                {
+                    "Name":"Crit DMG%",
+                    "Value":1
+                },
+                {
+                    "Name":"Lightning DMG",
+                    "Value":1
+                }
+            ],
+            "MainStats":[
+                {
+                    "Chest": ["Crit DMG%", "Crit Rate%"],
+                    "Feet": ["SPD", "ATK%"],
+                    "Orb": ["Lightning DMG", "ATK%"],
+                    "Rope": ["ATK%", "Energy Regen Rate%"]
+                }
+            ],
+            "Sets":[
+                {
+                    "Relic": "hts",
+                    "Planar": "wbp"
+                }
+            ]
+        }
+    ]
+}
