@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container px-4 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-bold text-blue-600">HSR Relic Manager</h1>
             <nav className="flex space-x-4">
