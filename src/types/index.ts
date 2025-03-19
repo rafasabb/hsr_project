@@ -28,6 +28,7 @@ export type SubStatRanges = {
 export interface Character {
   id: string;
   name: string;
+  weights: Record<string, number>;
   equippedRelics: {
     [key in RelicType]?: string; // Relic ID
   };

@@ -13,7 +13,11 @@ export default function RelicsList() {
 
   // Format relic and ornamnet display
   const formatRelic = (item: string) => {
-    return relicSets.find(x => x.internalName === item)?.displayName || ornamentSets.find(x => x.internalName === item)?.displayName || item;
+    // Extract the internal name from the prefixed value (relic_xxx or ornament_xxx)
+    const internalName = item.includes('_') ? item.split('_')[1] : item;
+    return relicSets.find(x => x.internalName === internalName)?.displayName || 
+           ornamentSets.find(x => x.internalName === internalName)?.displayName || 
+           item;
   }
   // Get the value of a specific substat by name
   const getSubStatValueByName = (subStats: Stat[], statName: string): number => {
@@ -74,11 +78,11 @@ export default function RelicsList() {
   // Create set filter options by combining relic sets and ornament sets
   const setFilterOptions: FilterOption[] = [
     ...relicSets.map(set => ({
-      value: set.internalName,
+      value: `relic_${set.internalName}`,
       label: set.displayName
     })),
     ...ornamentSets.map(set => ({
-      value: set.internalName,
+      value: `ornament_${set.internalName}`,
       label: set.displayName
     }))
   ];

@@ -1,30 +1,72 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useStore } from '../store/StoreContext';
 import { Character, RelicType } from '../types';
 import relicData from '../data/relicData.json';
+import gameData from '../data/gameData.json';
+import CharacterSelectionModal from '../components/CharacterSelectionModal';
+import WeightsEditorModal from '../components/WeightsEditorModal';
+import { FiTrash2, FiInfo } from 'react-icons/fi';
 
 export default function CharactersPage() {
-  const { store, addCharacter, updateCharacter, equipRelic, unequipRelic } = useStore();
-  const [name, setName] = useState('');
+  const { store, addCharacter, updateCharacter, deleteCharacter, equipRelic, unequipRelic } = useStore();
+  // No longer need selectedCharacterName state as characters are added directly from modal
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [characterToDelete, setCharacterToDelete] = useState<string | null>(null);
+  const [isWeightsModalOpen, setIsWeightsModalOpen] = useState(false);
+  const [editingCharacter, setEditingCharacter] = useState<Character | null>(null);
   
   const { relicTypes } = relicData;
   
-  const handleAddCharacter = () => {
-    if (!name.trim()) return;
-    
-    const newCharacter: Character = {
-      id: crypto.randomUUID(),
-      name: name.trim(),
-      equippedRelics: {}
-    };
-    
-    addCharacter(newCharacter);
-    setName('');
-  };
+  // Character addition is now handled directly in the modal
   
   const handleSelectCharacter = (character: Character) => {
     setSelectedCharacter(character);
+  };
+  
+  const handleDeleteCharacter = (characterId: string) => {
+    // Set the character to delete for confirmation
+    setCharacterToDelete(characterId);
+  };
+
+  const handleEditWeights = (character: Character) => {
+    setEditingCharacter(character);
+    setIsWeightsModalOpen(true);
+  };
+
+  const handleSaveWeights = (weights: Record<string, number>) => {
+    if (editingCharacter) {
+      const updatedCharacter = {
+        ...editingCharacter,
+        weights
+      };
+      updateCharacter(updatedCharacter);
+    }
+  };
+
+  const areAllWeightsZero = (weights?: Record<string, number>) => {
+    if (!weights) return false;
+    return Object.values(weights).every(value => value === 0);
+  };
+  
+  const confirmDeleteCharacter = () => {
+    if (characterToDelete) {
+      // Delete the character
+      deleteCharacter(characterToDelete);
+      
+      // If the deleted character was selected, clear the selection
+      if (selectedCharacter && selectedCharacter.id === characterToDelete) {
+        setSelectedCharacter(null);
+      }
+      
+      // Clear the confirmation state
+      setCharacterToDelete(null);
+    }
+  };
+  
+  const cancelDeleteCharacter = () => {
+    // Clear the confirmation state
+    setCharacterToDelete(null);
   };
   
   const handleEquipRelic = (relicType: RelicType, relicId: string) => {
@@ -67,41 +109,95 @@ export default function CharactersPage() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Character Management</h1>
       
-      {/* Add Character Form */}
+      {/* Add Character Button */}
       <div className="mb-8 p-4 bg-gray-100 rounded-lg">
         <h2 className="text-xl font-semibold mb-4">Add New Character</h2>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Character Name"
-            className="flex-1 px-3 py-2 border rounded"
-          />
-          <button 
-            onClick={handleAddCharacter}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Add Character
-          </button>
-        </div>
+        <button 
+          onClick={() => setIsModalOpen(true)}
+          className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Select a character to add
+        </button>
       </div>
+      
+      {/* Character Selection Modal */}
+      <CharacterSelectionModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSelectCharacter={(name) => {}} // Keep for backward compatibility
+        addCharacter={addCharacter}
+        existingCharacters={store.characters}
+      />
       
       {/* Character List */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {store.characters.map(character => (
           <div 
             key={character.id} 
-            className={`p-4 border rounded cursor-pointer ${selectedCharacter?.id === character.id ? 'border-blue-500 bg-blue-50' : ''}`}
-            onClick={() => handleSelectCharacter(character)}
+            className={`p-4 border rounded ${selectedCharacter?.id === character.id ? 'border-blue-500 bg-blue-50' : ''} ${areAllWeightsZero(character.weights) ? 'border-red-500' : ''}`}
           >
-            <h3 className="font-semibold">{character.name}</h3>
-            <p className="text-sm text-gray-600">
-              Equipped Relics: {Object.keys(character.equippedRelics).length}/6
-            </p>
+            <div className="flex justify-between items-start mb-2">
+              <div 
+                className="cursor-pointer flex-grow"
+                onClick={() => handleSelectCharacter(character)}
+              >
+                <h3 className="font-semibold">{character.name}</h3>
+                <p className="text-sm text-gray-600">
+                  Equipped Relics: {Object.keys(character.equippedRelics).length}/6
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleEditWeights(character);
+                  }}
+                  className="p-1 text-gray-500 hover:text-blue-500 transition-colors"
+                  title="Edit weights"
+                >
+                  <FiInfo size={18} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteCharacter(character.id);
+                  }}
+                  className="p-1 text-gray-500 hover:text-red-500 transition-colors"
+                  title="Delete character"
+                >
+                  <FiTrash2 size={18} />
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
+      
+      {/* Delete Confirmation Dialog */}
+      {characterToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 className="text-xl font-semibold mb-4">Confirm Deletion</h3>
+            <p className="mb-6">
+              Are you sure you want to delete this character? This action cannot be undone.
+            </p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={cancelDeleteCharacter}
+                className="px-4 py-2 border rounded hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDeleteCharacter}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Equip Relics Section */}
       {selectedCharacter && (
@@ -159,6 +255,14 @@ export default function CharactersPage() {
         </div>
       )}
       
+      {/* Weights Editor Modal */}
+      <WeightsEditorModal
+        isOpen={isWeightsModalOpen}
+        onClose={() => setIsWeightsModalOpen(false)}
+        character={editingCharacter!}
+        onSave={handleSaveWeights}
+      />
+
       {store.characters.length === 0 && (
         <div className="text-center p-8 bg-gray-100 rounded-lg">
           <p className="text-lg">No characters found. Add a character to get started!</p>

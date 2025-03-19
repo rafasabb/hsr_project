@@ -11,6 +11,7 @@ type StoreContextType = {
   store: AppStore;
   addCharacter: (character: Character) => void;
   updateCharacter: (character: Character) => void;
+  deleteCharacter: (characterId: string) => void;
   addRelic: (relic: Relic) => void;
   updateRelic: (relic: Relic) => void;
   deleteRelic: (relicId: string) => void;
@@ -90,6 +91,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const deleteCharacter = (characterId: string) => {
+    // Remove the character from the store
+    setStore({
+      ...store,
+      characters: store.characters.filter(character => character.id !== characterId)
+    });
+  };
+
   const deleteRelic = (relicId: string) => {
     // First, unequip this relic from any character that has it equipped
     const updatedCharacters = store.characters.map(character => {
@@ -122,6 +131,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         store,
         addCharacter,
         updateCharacter,
+        deleteCharacter,
         addRelic,
         updateRelic,
         deleteRelic,
