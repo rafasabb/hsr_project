@@ -1,5 +1,6 @@
 import AddRelicForm from '../components/AddRelicForm';
 import RelicsList from '../components/RelicsList';
+import ImportRelicForm from '../components/ImportRelicForm';;
 
 export default function RelicsPage() {
 
@@ -10,6 +11,7 @@ export default function RelicsPage() {
       <div className="flex flex-row gap-6">
         {/* Add Relic Form - Sidebar */}
         <div className="w-80 shrink-0">
+          <ImportRelicForm />
           <AddRelicForm/>
         </div>
         

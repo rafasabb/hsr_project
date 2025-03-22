@@ -1,0 +1,54 @@
+{
+  "characters": {
+    "1001": {
+      "id": "1001",
+      "name": "March 7th",
+      "alias": "March 7th • Preservation"
+    },
+    "1224": {
+      "id": "1224",
+      "name": "March 7th",
+      "alias": "March 7th • The Hunt"
+    },
+    "8001": {
+      "id": "8001",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Destruction"
+    },
+    "8002": {
+      "id": "8002",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Destruction"
+    },
+    "8003": {
+      "id": "8003",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Preservation"
+    },
+    "8004": {
+      "id": "8004",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Preservation"
+    },
+    "8005": {
+      "id": "8005",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Harmony"
+    },
+    "8006": {
+      "id": "8006",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Harmony"
+    },
+    "8007": {
+      "id": "8007",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Rememberance"
+    },
+    "8008": {
+      "id": "8008",
+      "name": "Trailblazer",
+      "alias": "Trailblazer • Rememberance"
+    }  
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "NORMALIZATION_FACTORS": {
+    "Crit DMG%": 1.0,
+    "DEF%": 1.2,
+    "HP%": 1.5,
+    "ATK%": 1.5,
+    "Effect Hit Rate%": 1.5,
+    "Effect RES%": 1.5,
+    "Crit Rate%": 2.0,
+    "Speed": 2.59,
+    "Outgoing Healing Boost%": 1.87,
+    "Energy Regen Rate%": 3.33,
+    "Physical DMG": 1.67,
+    "Fire DMG": 1.67,
+    "Ice DMG": 1.67,
+    "Wind DMG": 1.67,
+    "Lightning DMG": 1.67,
+    "Quantum DMG": 1.67,
+    "Imaginary DMG": 1.67,
+    "Break Effect%": 1.0
+  },
+  "PERCENT_STAT_LOW_ROLLS": {
+    "HP%": 0.0388,
+    "ATK%": 0.0388,
+    "DEF%": 0.0486
+  },
+  "FLAT_STAT_HIGH_ROLLS": {
+    "HP": 252,
+    "ATK": 126,
+    "DEF": 126
+  },
+  "FLAT_STAT_LOW_ROLLS": {
+    "HP": 33,
+    "ATK": 16,
+    "DEF": 16
+  }
+}

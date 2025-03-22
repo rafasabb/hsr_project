@@ -13,6 +13,7 @@ type StoreContextType = {
   updateCharacter: (character: Character) => void;
   deleteCharacter: (characterId: string) => void;
   addRelic: (relic: Relic) => void;
+  addRelics: (relics: Relic[]) => void;
   updateRelic: (relic: Relic) => void;
   deleteRelic: (relicId: string) => void;
   equipRelic: (characterId: string, relicId: string, relicType: Relic['type']) => void;
@@ -44,6 +45,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setStore({
       ...store,
       relics: [...store.relics, relic]
+    });
+  };
+
+  const addRelics = (relics: Relic[]) => {
+    setStore({
+      ...store,
+      relics: [...store.relics, ...relics]
     });
   };
 
@@ -133,6 +141,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         updateCharacter,
         deleteCharacter,
         addRelic,
+        addRelics,
         updateRelic,
         deleteRelic,
         equipRelic,

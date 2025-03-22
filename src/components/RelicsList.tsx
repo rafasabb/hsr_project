@@ -1,15 +1,23 @@
 import { useStore } from '../store/StoreContext';
 import DataTable, { FilterOption } from './DataTable';
 import { createColumnHelper } from '@tanstack/react-table';
-import { Relic, Stat, RelicType } from '../types';
+import { Relic, Stat } from '../types';
 import relicData from '../data/relicData.json';
+import { useState } from 'react';
+import { calculateRelicScore } from '../utils/relicScoring';
 
 const columnHelper = createColumnHelper<Relic>();
 
-const {mainStatValues, relicSets, ornamentSets, allStats} = relicData;
+const {relicSets, ornamentSets, allStats} = relicData;
 
 export default function RelicsList() {
   const { store, deleteRelic } = useStore();
+  const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(null);
+  
+  // Get the selected character object
+  const selectedCharacter = selectedCharacterId 
+    ? store.characters.find(c => c.id === selectedCharacterId) 
+    : null;
 
   // Format relic and ornamnet display
   const formatRelic = (item: string) => {
@@ -28,6 +36,12 @@ export default function RelicsList() {
   // Format a substat value for display
   const formatSubStatValue = (value: number) => {
     return value === 0 ? '0' : value.toString();
+  };
+
+  // Calculate score for a relic based on selected character
+  const getRelicScore = (relic: Relic): number | null => {
+    if (!selectedCharacter) return null;
+    return calculateRelicScore(relic, selectedCharacter, store).score;
   };
 
   const columns = [
@@ -52,6 +66,17 @@ export default function RelicsList() {
         enableHiding: true,
       })
     ),
+    // Add score column when a character is selected
+    ...(selectedCharacter ? [
+      columnHelper.accessor(row => getRelicScore(row), {
+        id: 'score',
+        header: `Score for ${selectedCharacter.name}`,
+        cell: info => {
+          const score = info.getValue();
+          return score !== null ? score.toFixed(2) : '-';
+        },
+      })
+    ] : []),
     columnHelper.display({
       id: 'actions',
       header: 'Actions',
@@ -114,10 +139,27 @@ export default function RelicsList() {
       options: mainStatFilterOptions
     }
   ];
-
+  
   return (
     <div className="p-4 border rounded-lg bg-gray-50">
-      <h2 className="text-xl font-semibold mb-4">Your Relics</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">Your Relics</h2>
+        
+        <div className="flex items-center">
+          <label htmlFor="character-select" className="mr-2 font-medium">Score for:</label>
+          <select
+            id="character-select"
+            className="border rounded p-2"
+            value={selectedCharacterId || ''}
+            onChange={(e) => setSelectedCharacterId(e.target.value || null)}
+          >
+            <option value="">Select a character</option>
+            {store.characters.map(character => (
+              <option key={character.id} value={character.id}>{character.name}</option>
+            ))}
+          </select>
+        </div>
+      </div>
       {store.relics.length > 0 ? (
         <DataTable 
           data={store.relics} 

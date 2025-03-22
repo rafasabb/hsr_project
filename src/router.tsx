@@ -4,6 +4,7 @@ import App from './App';
 import CharactersPage from './pages/CharactersPage';
 import RelicsPage from './pages/RelicsPage';
 import DashboardPage from './pages/DashboardPage';
+import CustomizePage from './pages/CustomizePage';
 
 // Create our root route
 const rootRoute = createRootRoute({
@@ -34,10 +35,18 @@ const relicsRoute = createRoute({
 });
 
 // Create the route tree using our routes
+const customizeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/customize',
+  component: CustomizePage,
+});
+
+// Create the route tree using our routes
 const routeTree = rootRoute.addChildren([
   indexRoute,
   charactersRoute,
   relicsRoute,
+  customizeRoute,
 ]);
 
 // Create the router using the route tree

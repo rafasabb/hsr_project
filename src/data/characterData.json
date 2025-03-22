@@ -1024,18 +1024,19 @@
         "id": "1210",
         "name": "Guinaifen",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "ATK%":0.75,
+          "HP%":0.5,
+          "DEF%":0.5,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
+          "Effect Hit Rate%": 1,
+          "Effect RES%": 0.5,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
+          "Energy Regen Rate%":1,
           "Outgoing Healing Boost%":0,
           "Physical DMG": 0,
-          "Fire DMG": 0,
+          "Fire DMG": 1,
           "Ice DMG": 0,
           "Wind DMG": 0,
           "Lightning DMG": 0,
@@ -1043,14 +1044,14 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["ATK%", "Effect Hit Rate%"],
+          "Feet": ["SPD"],
+          "Orb": ["ATK%", "Fire DMG"],
+          "Rope": ["ATK%", "Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["pdc"],
+          "ornament": ["foa", "pld", "lss", "brk", "ffg", "spv"]
         }
       },
       "1211": {
@@ -1058,15 +1059,16 @@
         "name": "Bailu",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "HP%":1,
+          "DEF%":0.75,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
+          "Effect RES%": 0.75,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
+          "Energy Regen Rate%":1,
+          "Outgoing Healing Boost%":1,
           "Physical DMG": 0,
           "Fire DMG": 0,
           "Ice DMG": 0,
@@ -1076,113 +1078,116 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Outgoing Healing Boost%"],
+          "Feet": ["HP%", "SPD"],
+          "Orb": ["HP%"],
+          "Rope": ["HP%", "Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["mth"],
+          "ornament": ["foa", "pld", "lss", "brk", "gtb", "spv"]
         }
       },
       "1212": {
         "id": "1212",
         "name": "Jingliu",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
-          "Physical DMG": 0,
-          "Fire DMG": 0,
-          "Ice DMG": 0,
-          "Wind DMG": 0,
-          "Lightning DMG": 0,
-          "Quantum DMG": 0,
-          "Imaginary DMG": 0
+            "ATK%":0.75,
+            "HP%":0,
+            "DEF%":0,
+            "SPD":1,
+            "Crit Rate%":1,
+            "Crit DMG%":1,
+            "Effect Hit Rate%": 0,
+            "Effect RES%": 0,
+            "Break Effect%": 0,
+            "Energy Regen Rate%":0,
+            "Outgoing Healing Boost%":0,
+            "Physical DMG": 0,
+            "Fire DMG": 0,
+            "Ice DMG": 1,
+            "Wind DMG": 0,
+            "Lightning DMG": 0,
+            "Quantum DMG": 0,
+            "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Ice DMG"],
+          "Rope": ["ATK%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["sle"],
+          "ornament": ["rua", "ffg"]
         }
       },
       "1213": {
         "id": "1213",
         "name": "Dan Heng • Imbibitor Lunae",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
-          "Physical DMG": 0,
-          "Fire DMG": 0,
-          "Ice DMG": 0,
-          "Wind DMG": 0,
-          "Lightning DMG": 0,
-          "Quantum DMG": 0,
-          "Imaginary DMG": 0
+            "ATK%":0.75,
+            "HP%":0,
+            "DEF%":0,
+            "SPD":1,
+            "Crit Rate%":1,
+            "Crit DMG%":1,
+            "Effect Hit Rate%": 0,
+            "Effect RES%": 0,
+            "Break Effect%": 0,
+            "Energy Regen Rate%":0,
+            "Outgoing Healing Boost%":0,
+            "Physical DMG": 0,
+            "Fire DMG": 0,
+            "Ice DMG": 0,
+            "Wind DMG": 0,
+            "Lightning DMG": 0,
+            "Quantum DMG": 0,
+            "Imaginary DMG": 1
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Imaginary DMG"],
+          "Rope": ["ATK%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["pmc", "wbd"],
+          "ornament": ["rua", "ffg", "sss"]
         }
       },
       "1214": {
         "id": "1214",
         "name": "Xueyi",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
-          "Physical DMG": 0,
-          "Fire DMG": 0,
-          "Ice DMG": 0,
-          "Wind DMG": 0,
-          "Lightning DMG": 0,
-          "Quantum DMG": 0,
-          "Imaginary DMG": 0
+            "ATK%":0.75,
+            "HP%":0,
+            "DEF%":0,
+            "SPD":1,
+            "Crit Rate%":1,
+            "Crit DMG%":1,
+            "Effect Hit Rate%": 0,
+            "Effect RES%": 0,
+            "Break Effect%": 1,
+            "Energy Regen Rate%":0,
+            "Outgoing Healing Boost%":0,
+            "Physical DMG": 0,
+            "Fire DMG": 0,
+            "Ice DMG": 0,
+            "Wind DMG": 0,
+            "Lightning DMG": 0,
+            "Quantum DMG": 1,
+            "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Quantum DMG"],
+          "Rope": ["ATK%", "Break Effect%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["gbs"],
+          "ornament": ["tkb", "sss", "ins", "ffg"]
         }
       },
       "1215": {
@@ -1190,14 +1195,15 @@
         "name": "Hanya",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "HP%":0.75,
+          "DEF%":0.75,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
+          "Effect RES%": 0.5,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
+          "Energy Regen Rate%":1,
           "Outgoing Healing Boost%":0,
           "Physical DMG": 0,
           "Fire DMG": 0,
@@ -1208,14 +1214,14 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["HP%", "DEF%"],
+          "Feet": ["SPD"],
+          "Orb": ["HP%", "DEF%"],
+          "Rope": ["Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["mth", "etl"],
+          "ornament": ["brk","foa", "pld", "lss", "spv"]
         }
       },
       "1217": {
@@ -1223,15 +1229,16 @@
         "name": "Huohuo",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "HP%":1,
+          "DEF%":0.75,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
+          "Effect RES%": 0.75,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
+          "Energy Regen Rate%":1,
+          "Outgoing Healing Boost%":1,
           "Physical DMG": 0,
           "Fire DMG": 0,
           "Ice DMG": 0,
@@ -1241,14 +1248,252 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Outgoing Healing Boost%"],
+          "Feet": ["HP%", "SPD"],
+          "Orb": ["HP%"],
+          "Rope": ["HP%", "Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["pwc", "mth"],
+          "ornament": ["foa", "pld", "lss", "brk", "spv", "gtb"]
+        }
+      },
+      "1218": {
+        "id": "1218",
+        "name": "Jiaoqiu",
+        "weights":{
+          "ATK%":0.5,
+          "HP%":0.5,
+          "DEF%":0.5,
+          "SPD":1,
+          "Crit Rate%":0,
+          "Crit DMG%":0,
+          "Effect Hit Rate%": 1,
+          "Effect RES%": 0.5,
+          "Break Effect%": 0,
+          "Energy Regen Rate%":0,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 1,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["Effect Hit Rate%"],
+          "Feet": ["SPD"],
+          "Orb": ["ATK%", "HP%", "DEF%", "Fire DMG"],
+          "Rope": ["ATK%", "Energy Regen Rate%"]
+        },
+        "sets": {
+          "relic": ["etl"],
+          "ornament": ["spv"]
+        }
+      },
+      "1220": {
+        "id": "1220",
+        "name": "Feixiao",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%":0,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 1,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Wind DMG"],
+          "Rope": ["ATK%"]
+        },
+        "sets": {
+          "relic": ["wsv", "agd"],
+          "ornament": ["ddw"]
+        }
+      },
+      "1221": {
+        "id": "1221",
+        "name": "Yunli",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%":0,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 1,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Physical DMG"],
+          "Rope": ["ATK%"]
+        },
+        "sets": {
+          "relic": ["wsv"],
+          "ornament": ["ddw", "ins"]
+        }
+      },
+      "1222": {
+        "id": "1222",
+        "name": "Lingsha",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0.5,
+          "DEF%":0.5,
+          "SPD":1,
+          "Crit Rate%":0,
+          "Crit DMG%":0,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0.75,
+          "Break Effect%": 1,
+          "Energy Regen Rate%":1,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 1,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["ATK%", "Outgoing Healing Boost%"],
+          "Feet": ["SPD"],
+          "Orb": ["ATK%"],
+          "Rope": ["ATK%", "Break Effect%", "Energy Regen Rate%"]
+        },
+        "sets": {
+          "relic": ["ics"],
+          "ornament": ["fkl", "tkb", "spv"]
+        }
+      },
+      "1223": {
+        "id": "1223",
+        "name": "Moze",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%": 0,
+          "Outgoing Healing Boost%": 0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 1,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Lightning DMG"],
+          "Rope": ["ATK%"]
+        },
+        "sets": {
+          "relic": ["pdw", "agd"],
+          "ornament": ["ddw"]
+        }
+      },
+      "1224": {
+        "id": "1224",
+        "name": "March 7th",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%": 0,
+          "Outgoing Healing Boost%": 0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 1
+        },
+        "mainStats": {
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Imaginary DMG"],
+          "Rope": ["ATK%"]
+        },
+        "sets": {
+          "relic": ["mww", "wbd"],
+          "ornament": ["rua", "igt", "ffg"]
+        }
+      },
+      "1225": {
+        "id": "1225",
+        "name": "Fugue",
+        "weights":{
+          "ATK%":0,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":0,
+          "Crit DMG%":0,
+          "Effect Hit Rate%": 1,
+          "Effect RES%": 0,
+          "Break Effect%": 1,
+          "Energy Regen Rate%": 1,
+          "Outgoing Healing Boost%": 0,
+          "Physical DMG": 0,
+          "Fire DMG": 1,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["Effect Hit Rate%", "Break Effect%", "DEF%", "HP%"],
+          "Feet": ["SPD"],
+          "Orb": ["HP%", "DEF%"],
+          "Rope": ["Energy Regen Rate%", "Break Effect%"]
+        },
+        "sets": {
+          "relic": ["ics", "etl"],
+          "ornament": ["fkl", "tkb", "spv", "lss"]
         }
       },
       "1302": {
@@ -1256,15 +1501,16 @@
         "name": "Gallagher",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "HP%":0.75,
+          "DEF%":0.75,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
+          "Effect RES%": 0.75,
+          "Break Effect%": 1,
+          "Energy Regen Rate%":1,
+          "Outgoing Healing Boost%":1,
           "Physical DMG": 0,
           "Fire DMG": 0,
           "Ice DMG": 0,
@@ -1274,47 +1520,48 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Outgoing Healing Boost%"],
+          "Feet": ["SPD"],
+          "Orb": ["HP%", "DEF%"],
+          "Rope": ["Energy Regen Rate%", "Break Effect%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["mth", "ics", "tsm"],
+          "ornament": ["fkl", "tkb", "foa", "pld", "lss", "brk", "gtb"]
         }
       },
       "1303": {
         "id": "1303",
         "name": "Argenti",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
-          "Physical DMG": 0,
-          "Fire DMG": 0,
-          "Ice DMG": 0,
-          "Wind DMG": 0,
-          "Lightning DMG": 0,
-          "Quantum DMG": 0,
-          "Imaginary DMG": 0
+            "ATK%":0.75,
+            "HP%":0,
+            "DEF%":0,
+            "SPD":1,
+            "Crit Rate%":1,
+            "Crit DMG%":1,
+            "Effect Hit Rate%": 0,
+            "Effect RES%": 0,
+            "Break Effect%": 0,
+            "Energy Regen Rate%":0,
+            "Outgoing Healing Boost%":0,
+            "Physical DMG": 1,
+            "Fire DMG": 0,
+            "Ice DMG": 0,
+            "Wind DMG": 0,
+            "Lightning DMG": 0,
+            "Quantum DMG": 0,
+            "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Physical DMG"],
+          "Rope": ["ATK%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["sle"],
+          "ornament": ["ins", "sud", "ffg"]
         }
       },
       "1304": {
@@ -1322,14 +1569,15 @@
         "name": "Ruan Mei",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "HP%":0.5,
+          "DEF%":0.5,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
+          "Effect RES%": 0.5,
+          "Break Effect%": 1,
+          "Energy Regen Rate%":1,
           "Outgoing Healing Boost%":0,
           "Physical DMG": 0,
           "Fire DMG": 0,
@@ -1340,14 +1588,14 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["HP%", "DEF%"],
+          "Feet": ["SPD"],
+          "Orb": ["HP%", "DEF%"],
+          "Rope": ["Energy Regen Rate%", "Break Effect%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["wmm", "mth", "tsm"],
+          "ornament": ["spv", "brk", "foa", "pld", "lss"]
         }
       },
       "1305": {
@@ -1355,14 +1603,15 @@
         "name": "Aventurine",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
+          "HP%":0,
+          "DEF%":1,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
           "Effect Hit Rate%": 0,
           "Effect RES%": 0,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
+          "Energy Regen Rate%":1,
           "Outgoing Healing Boost%":0,
           "Physical DMG": 0,
           "Fire DMG": 0,
@@ -1370,50 +1619,51 @@
           "Wind DMG": 0,
           "Lightning DMG": 0,
           "Quantum DMG": 0,
-          "Imaginary DMG": 0
+          "Imaginary DMG": 1
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%", "DEF%"],
+          "Feet": ["DEF%", "SPD"],
+          "Orb": ["DEF%", "Imaginary DMG"],
+          "Rope": ["DEF%", "Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["kpp", "pdw"],
+          "ornament": ["brk", "foa", "pld", "lss"]
         }
       },
       "1306": {
         "id": "1306",
         "name": "Dr. Ratio",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0,
-          "Energy Regen Rate%":0,
-          "Outgoing Healing Boost%":0,
-          "Physical DMG": 0,
-          "Fire DMG": 0,
-          "Ice DMG": 0,
-          "Wind DMG": 0,
-          "Lightning DMG": 0,
-          "Quantum DMG": 0,
-          "Imaginary DMG": 0
+            "ATK%":0.75,
+            "HP%":0,
+            "DEF%":0,
+            "SPD":1,
+            "Crit Rate%":1,
+            "Crit DMG%":1,
+            "Effect Hit Rate%": 0,
+            "Effect RES%": 0,
+            "Break Effect%": 0,
+            "Energy Regen Rate%":0,
+            "Outgoing Healing Boost%":0,
+            "Physical DMG": 0,
+            "Fire DMG": 0,
+            "Ice DMG": 0,
+            "Wind DMG": 0,
+            "Lightning DMG": 0,
+            "Quantum DMG": 0,
+            "Imaginary DMG": 1
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Imaginary DMG"],
+          "Rope": ["ATK%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["pdw", "wbd"],
+          "ornament": ["ddw", "igt", "ffg", "ins"]
         }
       },
       "1307": {
@@ -1421,14 +1671,15 @@
         "name": "Sparkle",
         "weights":{
           "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "HP":0.5,
+          "DEF%":0.5,
+          "SPD":1,
           "Crit Rate%":0,
-          "Crit DMG%":0,
+          "Crit DMG%":1,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
+          "Effect RES%": 0.5,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
+          "Energy Regen Rate%":1,
           "Outgoing Healing Boost%":0,
           "Physical DMG": 0,
           "Fire DMG": 0,
@@ -1439,26 +1690,27 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%"],
+          "Feet": ["SPD"],
+          "Orb": ["DEF%", "HP%"],
+          "Rope": ["Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["sro", "mth", "etl"],
+          "ornament": ["brk", "foa", "pld", "lss", "spv"]
         }
       },
       "1308": {
         "id": "1308",
         "name": "Black Swan",
         "weights":{
-          "ATK%":0,
+          "ATK%":1,
+          "HP%":0,
           "DEF%":0,
-          "SPD":0,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
+          "Effect Hit Rate%": 1,
           "Effect RES%": 0,
           "Break Effect%": 0,
           "Energy Regen Rate%":0,
@@ -1466,31 +1718,32 @@
           "Physical DMG": 0,
           "Fire DMG": 0,
           "Ice DMG": 0,
-          "Wind DMG": 0,
+          "Wind DMG": 1,
           "Lightning DMG": 0,
           "Quantum DMG": 0,
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["ATK%", "Effect Hit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Wind DMG"],
+          "Rope": ["ATK%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["pdc"],
+          "ornament": ["pce", "ffg", "sss"]
         }
       },
       "1309": {
         "id": "1309",
         "name": "Acheron",
         "weights":{
-          "ATK%":0,
+          "ATK%":0.75,
+          "HP%":0,
           "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
           "Effect Hit Rate%": 0,
           "Effect RES%": 0,
           "Break Effect%": 0,
@@ -1500,36 +1753,37 @@
           "Fire DMG": 0,
           "Ice DMG": 0,
           "Wind DMG": 0,
-          "Lightning DMG": 0,
+          "Lightning DMG": 1,
           "Quantum DMG": 0,
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["Crit DMG%", "Crit Rate%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Lightning DMG"],
+          "Rope": ["ATK%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["pdw"],
+          "ornament": ["igt"]
         }
       },
       "1312": {
         "id": "1312",
         "name": "Robin",
         "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
+          "ATK%":1,
+          "HP%":0.5,
+          "DEF%":0.5,
+          "SPD":1,
           "Crit Rate%":0,
           "Crit DMG%":0,
           "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
+          "Effect RES%": 0.5,
           "Break Effect%": 0,
-          "Energy Regen Rate%":0,
+          "Energy Regen Rate%":1,
           "Outgoing Healing Boost%":0,
-          "Physical DMG": 0,
+          "Physical DMG": 1,
           "Fire DMG": 0,
           "Ice DMG": 0,
           "Wind DMG": 0,
@@ -1538,25 +1792,196 @@
           "Imaginary DMG": 0
         },
         "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
+          "Chest": ["ATK%"],
+          "Feet": ["ATK%", "SPD"],
+          "Orb": ["ATK%", "Physical DMG"],
+          "Rope": ["Energy Regen Rate%"]
         },
         "sets": {
-          "relic": [],
-          "ornament": []
+          "relic": ["mww", "sro", "pdc", "wsv"],
+          "ornament": ["spv", "brk", "foa", "pld", "lss"]
         }
       },
       "1315": {
         "id": "1315",
         "name": "Boothill",
         "weights":{
-          "ATK%":0,
+          "ATK%":1,
+          "HP%":0,
           "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
+          "SPD":1,
+          "Crit Rate%":0.25,
+          "Crit DMG%":0.25,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 1,
+          "Energy Regen Rate%":0,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 1,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+        },
+        "mainStats": {
+          "Chest": ["ATK%", "Crit Rate%", "Crit DMG%"],
+          "Feet": ["SPD"],
+          "Orb": ["ATK%", "Break Effect%", "Physical DMG"],
+          "Rope": ["Break Effect%"]
+        },
+        "sets": {
+          "relic": ["ics"],
+          "ornament": ["tkb"]
+        }
+    },
+    "1317": {
+        "id": "1317",
+        "name": "Rappa",
+        "weights":{
+          "ATK%":0.5,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":0.25,
+          "Crit DMG%":0.25,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 1,
+          "Energy Regen Rate%":0,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 1
+        },
+        "mainStats": {
+          "Chest": ["ATK%", "Crit Rate%", "Crit DMG%"],
+          "Feet": ["SPD"],
+          "Orb": ["ATK%", "Break Effect%", "Imaginary DMG"],
+          "Rope": ["Break Effect%", "Energy Regen Rate%"]
+        },
+        "sets": {
+          "relic": ["ics"],
+          "ornament": ["tkb"]
+        }
+    },
+    "1401": {
+        "id": "1401",
+        "name": "The Herta",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%":0,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 1,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+      },
+      "mainStats": {
+          "Chest": ["Crit Rate%", "Crit DMG%"],
+          "Feet": ["ATK%","SPD"],
+          "Orb": ["ATK%", "Ice DMG"],
+          "Rope": ["ATK%"]
+        },
+        "sets": {
+          "relic": ["sle"],
+          "ornament": ["igt"]
+        }
+    },
+    "1402": {
+        "id": "1402",
+        "name": "Aglaea",
+        "weights":{
+          "ATK%":0.75,
+          "HP%":0,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%":1,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 1,
+          "Quantum DMG": 0,
+          "Imaginary DMG": 0
+      },
+        "mainStats": {
+          "Chest": ["Crit Rate%", "Crit DMG%"],
+          "Feet": ["ATK%","SPD"],
+          "Orb": ["ATK%", "Lightning DMG"],
+          "Rope": ["ATK%", "Energy Regen Rate%"]
+        },
+        "sets": {
+          "relic": ["hts"],
+          "ornament": ["wbp", "rua", "ffg"]
+        }
+    },
+      "1403": {
+        "id": "1403",
+        "name": "Tribbie",
+        "weights":{
+          "ATK%":0,
+          "HP%":0.75,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
+          "Effect Hit Rate%": 0,
+          "Effect RES%": 0,
+          "Break Effect%": 0,
+          "Energy Regen Rate%":1,
+          "Outgoing Healing Boost%":0,
+          "Physical DMG": 0,
+          "Fire DMG": 0,
+          "Ice DMG": 0,
+          "Wind DMG": 0,
+          "Lightning DMG": 0,
+          "Quantum DMG": 1,
+          "Imaginary DMG": 0
+      },
+      "mainStats": {
+        "Chest": ["Crit Rate%", "Crit DMG%"],
+        "Feet": ["HP%", "SPD"],
+        "Orb": ["HP%", "Quantum DMG"],
+        "Rope": ["HP%", "Energy Regen Rate%"]
+      },
+      "sets": {
+        "relic": ["pmc", "etl"],
+        "ornament": ["bcd", "spv"]
+      }
+    },
+      "1404": {
+        "id": "1404",
+        "name": "Mydei",
+        "weights":{
+          "ATK%":0,
+          "HP%":1,
+          "DEF%":0,
+          "SPD":1,
+          "Crit Rate%":1,
+          "Crit DMG%":1,
           "Effect Hit Rate%": 0,
           "Effect RES%": 0,
           "Break Effect%": 0,
@@ -1568,84 +1993,19 @@
           "Wind DMG": 0,
           "Lightning DMG": 0,
           "Quantum DMG": 0,
-          "Imaginary DMG": 0
-        },
-        "mainStats": {
-          "Chest": [],
-          "Feet": [],
-          "Orb": [],
-          "Rope": []
-        },
-        "sets": {
-          "relic": [],
-          "ornament": []
-        }
+          "Imaginary DMG": 1
+      },
+      "mainStats": {
+        "Chest": ["Crit Rate%", "Crit DMG%"],
+        "Feet": ["HP%","SPD"],
+        "Orb": ["HP%", "Imaginary DMG"],
+        "Rope": ["HP%"]
+      },
+      "sets": {
+        "relic": ["sle"],
+        "ornament": ["bcd", "rua"]
+      }
     },
-    "1317": {
-        "id": "1317",
-        "name": "Rappa",
-        "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0
-    }},
-    "1401": {
-        "id": "1401",
-        "name": "The Herta",
-        "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0
-      }},
-    "1402": {
-        "id": "1402",
-        "name": "Aglaea",
-        "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0
-      }},
-      "1403": {
-        "id": "1403",
-        "name": "Tribbie",
-        "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0
-      }},
-      "1404": {
-        "id": "1404",
-        "name": "Mydei",
-        "weights":{
-          "ATK%":0,
-          "DEF%":0,
-          "SPD":0,
-          "Crit Rate%":0,
-          "Crit DMG%":0,
-          "Effect Hit Rate%": 0,
-          "Effect RES%": 0,
-          "Break Effect%": 0
-      }},
       "1405": {
         "id": "1405",
         "name": "Anaxa",

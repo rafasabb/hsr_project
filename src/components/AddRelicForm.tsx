@@ -3,6 +3,7 @@ import { FiInfo } from 'react-icons/fi';
 import { useStore } from '../store/StoreContext';
 import { Relic, RelicType, Stat, SubStatRanges } from '../types';
 import relicData from '../data/relicData.json';
+import characterUtils from '../utils/characterUtils';
 
 const { relicTypes, relicSets, ornamentSets, allStats, mainStatValues, subStatRanges } = relicData as {
   relicTypes: string[];
@@ -17,12 +18,17 @@ const initialStatState: Stat = { name: '', value: 0 };
 
 export default function AddRelicForm() {
   const { store, addRelic } = useStore();
-  
+  const { generateRelicId } = characterUtils();
+
   const [type, setType] = useState<RelicType>('Hand');
   const [set, setSet] = useState<string>(relicSets[0].internalName);
   const [mainStat, setMainStat] = useState<Stat>(initialStatState);
   const [subStats, setSubStats] = useState<Stat[]>(Array(4).fill({ ...initialStatState }));
   const [invalidSubStats, setInvalidSubStats] = useState<boolean[]>(Array(4).fill(false));
+  
+  // Track the last selected relic and ornament sets separately
+  const [lastRelicSet, setLastRelicSet] = useState<string>(relicSets[0].internalName);
+  const [lastOrnamentSet, setLastOrnamentSet] = useState<string>(ornamentSets[0].internalName);
   
   // Determine if the current relic type is an ornament (Orb or Rope)
   const isOrnament = type === 'Orb' || type === 'Rope';
@@ -128,32 +134,26 @@ export default function AddRelicForm() {
     }
     
     // Update set when switching between relic and ornament types
-    if (isOrnament) {
-      setSet(ornamentSets[0].internalName);
+    const currentIsOrnament = type === 'Orb' || type === 'Rope';
+    
+    if (currentIsOrnament) {
+      // Switching to ornament - use the last ornament set
+      setSet(lastOrnamentSet);
     } else {
-      setSet(relicSets[0].internalName);
+      // Switching to relic - use the last relic set
+      setSet(lastRelicSet);
     }
-  }, [type, isOrnament]);
+  }, [type, lastRelicSet, lastOrnamentSet]);
   
-  // Generate a deterministic ID based on relic properties
-  const generateRelicId = (
-    type: RelicType,
-    set: string,
-    mainStat: Stat,
-    subStats: Stat[]
-  ): string => {
-    // Sort substats by name to ensure consistent ordering
-    const sortedSubStats = [...subStats].sort((a, b) => a.name.localeCompare(b.name));
-    
-    // Create a string representation of the relic properties
-    const relicString = `${type}-${set}-${mainStat.name}:${mainStat.value}-${
-      sortedSubStats
-        .map(stat => `${stat.name}:${stat.value}`)
-        .join('-')
-    }`;
-    
-    return relicString;
-  };
+  // Update the last selected set when set changes
+  useEffect(() => {
+    // Only update if the set has actually changed from the last saved value
+    if (isOrnament && set !== lastOrnamentSet) {
+      setLastOrnamentSet(set);
+    } else if (!isOrnament && set !== lastRelicSet) {
+      setLastRelicSet(set);
+    }
+  }, [set, isOrnament, lastOrnamentSet, lastRelicSet]);
 
   const handleAddRelic = () => {
     // Validate inputs
@@ -170,7 +170,7 @@ export default function AddRelicForm() {
     }
     
     // Check if any substat has invalid values
-    const hasInvalidValues = subStats.some((stat, index) => {
+    const hasInvalidValues = subStats.some((stat) => {
       if (!stat.name.trim() || stat.value <= 0) return false; // Skip empty stats
       const range = subStatRanges[stat.name];
       return range && (stat.value < range.min || stat.value > range.max);
@@ -216,15 +216,13 @@ export default function AddRelicForm() {
     
     addRelic(newRelic);
     
-    // Reset form
-    setMainStat(initialStatState);
-    setSubStats(Array(4).fill({ ...initialStatState }));
-    // Set the appropriate set based on current type
-    if (isOrnament) {
-      setSet(ornamentSets[0].internalName);
-    } else {
-      setSet(relicSets[0].internalName);
+    // Reset form but keep the current set selection
+    if (type !== 'Hand' && type !== 'Head') {
+      setMainStat(initialStatState);
     }
+
+    setSubStats(Array(4).fill({ ...initialStatState }));
+
   };
 
   return (

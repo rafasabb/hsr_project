@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useStore } from '../store/StoreContext';
 import { Character, RelicType } from '../types';
 import relicData from '../data/relicData.json';
-import gameData from '../data/gameData.json';
 import CharacterSelectionModal from '../components/CharacterSelectionModal';
-import WeightsEditorModal from '../components/WeightsEditorModal';
 import { FiTrash2, FiInfo } from 'react-icons/fi';
 
 export default function CharactersPage() {
@@ -27,26 +25,6 @@ export default function CharactersPage() {
   const handleDeleteCharacter = (characterId: string) => {
     // Set the character to delete for confirmation
     setCharacterToDelete(characterId);
-  };
-
-  const handleEditWeights = (character: Character) => {
-    setEditingCharacter(character);
-    setIsWeightsModalOpen(true);
-  };
-
-  const handleSaveWeights = (weights: Record<string, number>) => {
-    if (editingCharacter) {
-      const updatedCharacter = {
-        ...editingCharacter,
-        weights
-      };
-      updateCharacter(updatedCharacter);
-    }
-  };
-
-  const areAllWeightsZero = (weights?: Record<string, number>) => {
-    if (!weights) return false;
-    return Object.values(weights).every(value => value === 0);
   };
   
   const confirmDeleteCharacter = () => {
@@ -124,8 +102,6 @@ export default function CharactersPage() {
       <CharacterSelectionModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSelectCharacter={(name) => {}} // Keep for backward compatibility
-        addCharacter={addCharacter}
         existingCharacters={store.characters}
       />
       
@@ -134,7 +110,7 @@ export default function CharactersPage() {
         {store.characters.map(character => (
           <div 
             key={character.id} 
-            className={`p-4 border rounded ${selectedCharacter?.id === character.id ? 'border-blue-500 bg-blue-50' : ''} ${areAllWeightsZero(character.weights) ? 'border-red-500' : ''}`}
+            className={"p-4 border rounded border-blue-500 bg-blue-50"}
           >
             <div className="flex justify-between items-start mb-2">
               <div 
@@ -147,16 +123,6 @@ export default function CharactersPage() {
                 </p>
               </div>
               <div className="flex gap-2">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEditWeights(character);
-                  }}
-                  className="p-1 text-gray-500 hover:text-blue-500 transition-colors"
-                  title="Edit weights"
-                >
-                  <FiInfo size={18} />
-                </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -254,14 +220,6 @@ export default function CharactersPage() {
           </div>
         </div>
       )}
-      
-      {/* Weights Editor Modal */}
-      <WeightsEditorModal
-        isOpen={isWeightsModalOpen}
-        onClose={() => setIsWeightsModalOpen(false)}
-        character={editingCharacter!}
-        onSave={handleSaveWeights}
-      />
 
       {store.characters.length === 0 && (
         <div className="text-center p-8 bg-gray-100 rounded-lg">

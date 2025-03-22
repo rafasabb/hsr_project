@@ -1,0 +1,42 @@
+{
+    "source": "HSR-Scanner",
+    "build": "v1.3.0",
+    "version": 4,
+    "metadata": {
+        "uid": null,
+        "trailblazer": "Caelus"
+    },
+    "light_cones": [],
+    "relics": [
+        {
+            "set_id": "316",
+            "name": "Forge of the Kalpagni Lantern",
+            "slot": "Planar Sphere",
+            "rarity": 5,
+            "level": 15,
+            "mainstat": "ATK",
+            "substats": [
+                {
+                    "key": "SPD",
+                    "value": 2
+                },
+                {
+                    "key": "CRIT Rate_",
+                    "value": 2.9
+                },
+                {
+                    "key": "Effect RES_",
+                    "value": 7.7
+                },
+                {
+                    "key": "Break Effect_",
+                    "value": 30.4
+                }
+            ],
+            "location": "1310",
+            "lock": true,
+            "discard": false,
+            "_uid": "relic_35"
+        }
+    ]
+}

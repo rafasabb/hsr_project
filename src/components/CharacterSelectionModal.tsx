@@ -1,38 +1,30 @@
 import { useState, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import gameData from '../data/gameData.json';
-import characterData from '../data/characterData.json';
-import { Character } from '../types';
+import { Character, GameCharacterEntry } from '../types';
+import { useStore } from '../store/StoreContext';
+import characterUtils from '../utils/characterUtils';
 
 interface CharacterSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectCharacter: (characterName: string) => void;
-  addCharacter: (character: Character) => void;
   existingCharacters: Character[];
 }
-
-type GameCharacter = {
-  id: string;
-  name: string;
-  rarity: number;
-  path: string;
-  element: string;
-};
 
 export default function CharacterSelectionModal({
   isOpen,
   onClose,
-  onSelectCharacter,
-  addCharacter,
   existingCharacters,
 }: CharacterSelectionModalProps) {
-  const [characters, setCharacters] = useState<GameCharacter[]>([]);
+  const { addCharacter } = useStore();
+  const { createCharacter } = characterUtils();
+
+  const [characters, setCharacters] = useState<GameCharacterEntry[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     // Convert characters object from gameData to an array
-    const characterArray = Object.values(gameData.characters);
+    const characterArray : GameCharacterEntry[] = Object.values(gameData.characters);
     setCharacters(characterArray);
   }, []);
 
@@ -42,7 +34,7 @@ export default function CharacterSelectionModal({
   );
 
   // Handle character selection
-  const handleSelectCharacter = (character: GameCharacter) => {
+  const handleSelectCharacter = (character: GameCharacterEntry) => {
     // Check if character already exists
     const characterExists = existingCharacters.some(
       existingChar => existingChar.name.toLowerCase() === character.name.toLowerCase()
@@ -52,55 +44,10 @@ export default function CharacterSelectionModal({
       alert(`Character ${character.name} already exists!`);
       return;
     }
-    
-    // Find character weights in characterData if available
-    let characterWeights: Record<string, number> | undefined;
-    
-    // Search for character in characterData by name
-    const characterDataEntry = Object.values(characterData.characters).find(
-      (char: any) => char.name.toLowerCase() === character.name.toLowerCase()
-    );
-    
-    if (characterDataEntry && characterDataEntry.weights) {
-      characterWeights = characterDataEntry.weights;
-    } else {
-      // Fallback to default weights if not found in characterData
-      characterWeights = {
-        "ATK%": 0,
-        "DEF%": 0,
-        "SPD": 0,
-        "Crit Rate%": 0,
-        "Crit DMG%": 0,
-        "Effect Hit Rate%": 0,
-        "Effect RES%": 0,
-        "Break Effect%": 0,
-        "Energy Regen Rate%": 0,
-        "Outgoing Healing Boost%": 0,
-        "Physical DMG": 0,
-        "Fire DMG": 0,
-        "Ice DMG": 0,
-        "Wind DMG": 0,
-        "Lightning DMG": 0,
-        "Quantum DMG": 0,
-        "Imaginary DMG": 0
-      };
-      console.log(`No predefined weights found for ${character.name}, using defaults`);
-    }
-    
-    // Create new character with loaded weights
-    const newCharacter: Character = {
-      id: crypto.randomUUID(),
-      name: character.name,
-      equippedRelics: {},
-      weights: characterWeights
-    };
-    
-    // Add character to store
+
+    const newCharacter = createCharacter(character.id);
     addCharacter(newCharacter);
-    
-    // Also call the original onSelectCharacter for backward compatibility
-    onSelectCharacter(character.name);
-    
+
     onClose();
   };
 

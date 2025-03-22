@@ -33,6 +33,14 @@ function App() {
               >
                 Relics
               </Link>
+              <Link
+                to="/customize"
+                activeProps={{ className: 'text-blue-600 font-medium' }}
+                inactiveProps={{ className: 'text-gray-600 hover:text-blue-500' }}
+                className="px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Custimize
+              </Link>
             </nav>
           </div>
         </div>
