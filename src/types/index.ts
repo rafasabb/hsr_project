@@ -70,6 +70,9 @@ export type WeightPreset = {
     relic?: string[];
     ornament?: string[];
   };
+  perfectRelics?: {
+    [key in RelicType]?: Relic; // Relic ID
+  };
 };
 
 export type MainStatList = {

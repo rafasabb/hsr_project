@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Asset directories
+src/assets/character/
+src/assets/character_portrait/
+src/assets/character_preview/
+src/assets/relic/

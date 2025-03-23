@@ -42,17 +42,31 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   };
 
   const addRelic = (relic: Relic) => {
-    setStore({
-      ...store,
-      relics: [...store.relics, relic]
-    });
+    // Check if a relic with the same ID already exists
+    const relicExists = store.relics.some(r => r.id === relic.id);
+    
+    // Only add the relic if it doesn't already exist
+    if (!relicExists) {
+      setStore({
+        ...store,
+        relics: [...store.relics, relic]
+      });
+    }
   };
 
   const addRelics = (relics: Relic[]) => {
-    setStore({
-      ...store,
-      relics: [...store.relics, ...relics]
-    });
+    // Filter out relics that already exist in the store
+    const newRelics = relics.filter(newRelic => 
+      !store.relics.some(existingRelic => existingRelic.id === newRelic.id)
+    );
+    
+    // Only update the store if there are new relics to add
+    if (newRelics.length > 0) {
+      setStore({
+        ...store,
+        relics: [...store.relics, ...newRelics]
+      });
+    }
   };
 
   const updateRelic = (relic: Relic) => {

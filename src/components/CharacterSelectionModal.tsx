@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 import gameData from '../data/gameData.json';
-import { Character, GameCharacterEntry } from '../types';
+import { AppStore, Character, GameCharacterEntry } from '../types';
 import { useStore } from '../store/StoreContext';
 import characterUtils from '../utils/characterUtils';
 
 interface CharacterSelectionModalProps {
+  store: AppStore;
   isOpen: boolean;
   onClose: () => void;
   existingCharacters: Character[];

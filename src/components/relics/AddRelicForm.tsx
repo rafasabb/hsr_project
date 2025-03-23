@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { FiInfo } from 'react-icons/fi';
-import { useStore } from '../store/StoreContext';
-import { Relic, RelicType, Stat, SubStatRanges } from '../types';
-import relicData from '../data/relicData.json';
-import characterUtils from '../utils/characterUtils';
+import { useStore } from '../../store/StoreContext';
+import { Relic, RelicType, Stat, SubStatRanges } from '../../types';
+import relicData from '../../data/relicData.json';
+import characterUtils from '../../utils/characterUtils';
 
 const { relicTypes, relicSets, ornamentSets, allStats, mainStatValues, subStatRanges } = relicData as {
   relicTypes: string[];

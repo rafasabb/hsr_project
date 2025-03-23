@@ -1,4 +1,4 @@
-import { Character, Relic, RelicType, FlatStatKey, PercentStatKey, NormalizationFactorKey, Stat, Score, AppStore } from '../types';
+import { Character, Relic, RelicType, FlatStatKey, PercentStatKey, NormalizationFactorKey, Stat, Score, WeightPreset } from '../types';
 
 import characterUtils from './characterUtils';
 
@@ -15,11 +15,11 @@ const { NORMALIZATION_FACTORS, PERCENT_STAT_LOW_ROLLS, FLAT_STAT_HIGH_ROLLS, FLA
  * @param character The character to calculate the weight for
  * @returns The calculated weight for the flat stat
  */
-function calculateFlatStatWeight(statName: FlatStatKey, character: Character, store: AppStore): number {
-  const { getCurrentWeightPreset } = characterUtils();
+function calculateFlatStatWeight(statName: FlatStatKey, character: Character): number {
+  const { getCurrentWeightFromCharacter } = characterUtils();
   const baseStat = getCharacterBaseStat(character, statName);
 
-  const currentWeight = getCurrentWeightPreset(character.id, store);
+  const currentWeight = getCurrentWeightFromCharacter(character);
   if (!currentWeight) return 0;
 
   const percentStatName = `${statName}%` as PercentStatKey;
@@ -69,11 +69,10 @@ function calculateFlatStatNormalization(statName: FlatStatKey): number {
 function calculateSubstatScore(
     statName: string,
     statValue: number,
-    character: Character,
-    store: AppStore
+    character: Character
   ): number {
-    const { getCurrentWeightPreset } = characterUtils();
-    const currentWeight = getCurrentWeightPreset(character.id, store);
+    const { getCurrentWeightFromCharacter } = characterUtils();
+    const currentWeight = getCurrentWeightFromCharacter(character);
     if (!currentWeight) return 0;
      
     let weight = currentWeight.weights[statName] || 0;
@@ -81,7 +80,7 @@ function calculateSubstatScore(
     
     // Handle flat stats specially
     if (['HP', 'ATK', 'DEF'].includes(statName)) {
-      weight = calculateFlatStatWeight(statName as FlatStatKey, character, store);
+      weight = calculateFlatStatWeight(statName as FlatStatKey, character);
       normalization = calculateFlatStatNormalization(statName as FlatStatKey);
     }
   
@@ -94,12 +93,12 @@ function calculateSubstatScore(
  * @param character The character to calculate the score for
  * @returns The calculated score for the main stat
  */
-function calculateMainstatScore(relic: Relic, character: Character, store: AppStore): number {
+function calculateMainstatScore(relic: Relic, character: Character): number {
   // Returns 0 score for heads and hands as they have fixed main stats
   if (relic.type === 'Head' || relic.type === 'Hand') return 0;
 
-  const { getCurrentWeightPreset } = characterUtils();
-  const currentWeight = getCurrentWeightPreset(character.id, store);
+  const { getCurrentWeightFromCharacter } = characterUtils();
+  const currentWeight = getCurrentWeightFromCharacter(character);
   if (!currentWeight) return 0;
 
   // Get the main stat name from the relic
@@ -126,9 +125,9 @@ function calculateMainstatScore(relic: Relic, character: Character, store: AppSt
  * @param character The character to calculate the set score for
  * @returns A score bonus for the set match
  */
-function calculateSetScore(setName: string, character: Character, store: AppStore): number {
-  const { getCurrentWeightPreset } = characterUtils();
-  const currentWeight = getCurrentWeightPreset(character.id, store);
+function calculateSetScore(setName: string, character: Character): number {
+  const { getCurrentWeightFromCharacter } = characterUtils();
+  const currentWeight = getCurrentWeightFromCharacter(character);
   if (!currentWeight) return 0;
 
   const isOrnament: boolean = relicData.ornamentSets.some((x) => x.internalName === setName);
@@ -154,18 +153,18 @@ function calculateSetScore(setName: string, character: Character, store: AppStor
  * @param character The character to calculate the score for
  * @returns The calculated score for the relic
  */
-function calculateRelic(relic: Relic, character: Character, store: AppStore): number {
+function calculateRelic(relic: Relic, character: Character): number {
    // Calculate substat score
    let substatScore = 0;
    for (const substat of relic.subStats) {
-     substatScore += calculateSubstatScore(substat.name, substat.value, character, store);
+     substatScore += calculateSubstatScore(substat.name, substat.value, character);
    }
 
    // Calculate main stat score
-   let mainStatScore = calculateMainstatScore(relic, character, store);
+   let mainStatScore = calculateMainstatScore(relic, character);
    
    // Calculate set score
-   let setScore = calculateSetScore(relic.set, character, store);
+   let setScore = calculateSetScore(relic.set, character);
    
    // Return the total score
    return (substatScore + mainStatScore) * setScore;
@@ -177,11 +176,14 @@ function calculateRelic(relic: Relic, character: Character, store: AppStore): nu
  * @param character The character to calculate the score for
  * @returns The calculated score for the relic
  */
-export function calculateRelicScore(relic: Relic, character: Character, store: AppStore): Score {
+export function calculateRelicScore(relic: Relic, perfectRelic: Relic, character: Character): Score {
+    const { getCurrentWeightFromCharacter } = characterUtils();
+    
+    const weight = getCurrentWeightFromCharacter(character); 
+    if (!weight) return { score: 0, grade: 'F' };
     // Calculate the score for the relic
-    const actualScore = calculateRelic(relic, character, store);
-    const perfectRelic = generatePerfectRelic(relic.type, character, store);
-    const idealScore = calculateRelic(perfectRelic, character, store);
+    const actualScore = calculateRelic(relic, character);
+    const idealScore = calculateRelic(perfectRelic, character);
     const grade = getRelicGrade(idealScore, actualScore);
 
     return {
@@ -196,16 +198,10 @@ export function calculateRelicScore(relic: Relic, character: Character, store: A
  * @param relicType The type of relic to find the best main stat for
  * @returns The name of the best main stat for the relic type
  */
-function findBestMainStat(relicType: RelicType, character: Character, store: AppStore): string {
+function findBestMainStat(relicType: RelicType, weight: WeightPreset): string {
   // For Head and Hand, there's only one possible main stat
   if (relicType === 'Head') return 'HP';
   if (relicType === 'Hand') return 'ATK';
-
-  const { getCurrentWeightPreset } = characterUtils();
-  const currentWeight = getCurrentWeightPreset(character.id, store);
-  if (!currentWeight){
-    throw new Error('Invalid character ID');
-  }
   
   // Get the available main stats for this relic type
   const availableMainStats = allStats.mainStats[relicType];
@@ -214,7 +210,7 @@ function findBestMainStat(relicType: RelicType, character: Character, store: App
   }
   
   // Check if the character has recommended main stats for this relic type
-  const recommendedMainStats = currentWeight.mainStats[relicType as 'Chest' | 'Feet' | 'Orb' | 'Rope'];
+  const recommendedMainStats = weight.mainStats[relicType as 'Chest' | 'Feet' | 'Orb' | 'Rope'];
   if (recommendedMainStats && recommendedMainStats.length > 0) {
     // Return the first recommended main stat
     return recommendedMainStats[0];
@@ -224,7 +220,7 @@ function findBestMainStat(relicType: RelicType, character: Character, store: App
   let highestScore = -1;
   
   for (const statName of availableMainStats) {
-    const weight = currentWeight.weights[statName] || 0;
+    const newWeight = weight.weights[statName] || 0;
     const statValue = mainStatValues[statName as keyof typeof mainStatValues] || 0;
     let normalization = NORMALIZATION_FACTORS[statName as NormalizationFactorKey] || 1;
     
@@ -234,7 +230,7 @@ function findBestMainStat(relicType: RelicType, character: Character, store: App
       continue;
     }
     
-    const score = weight * normalization * statValue;
+    const score = newWeight * normalization * statValue;
     if (score > highestScore) {
       highestScore = score;
       bestMainStat = statName;
@@ -251,20 +247,14 @@ function findBestMainStat(relicType: RelicType, character: Character, store: App
  * @param character The character data to use for determining the best substats
  * @returns An array of the best substats for the relic
  */
-function findBestSubstats(mainStatName: string, relicType: RelicType, character: Character, store: AppStore): Stat[] {
-  const { getCurrentWeightPreset } = characterUtils();
-  const currentWeight = getCurrentWeightPreset(character.id, store);
-  if (!currentWeight) {
-    throw new Error('Invalid character ID');
-  };
-
+function findBestSubstats(mainStatName: string, relicType: RelicType, weight: WeightPreset): Stat[] {
   const availableSubstats = allStats.subStats.filter(stat => stat !== mainStatName);
   
   // Calculate score for each substat
   const substatScores: Array<{name: string; score: number}> = [];
   
   for (const statName of availableSubstats) {
-    let weight = currentWeight.weights[statName] || 0;
+    let newWeight = weight.weights[statName] || 0;
     let normalization = NORMALIZATION_FACTORS[statName as NormalizationFactorKey] || 1;
     const maxValue = subStatRanges[statName as keyof typeof subStatRanges]?.max || 0;
     
@@ -273,12 +263,12 @@ function findBestSubstats(mainStatName: string, relicType: RelicType, character:
       // For flat stats, we need to calculate their weight based on the character's base stats
       // This is a simplified approach since we don't have the character object here
       const percentStatName = `${statName}%` as PercentStatKey;
-      weight = currentWeight.weights[percentStatName] || 0;
+      newWeight = weight.weights[percentStatName] || 0;
       // Flat stats are generally less valuable, so we'll apply a penalty
-      weight *= 0.5;
+      newWeight *= 0.5;
     }
     
-    const score = weight * normalization * maxValue;
+    const score = newWeight * normalization * maxValue;
     substatScores.push({ name: statName, score });
   }
   
@@ -335,31 +325,28 @@ function findBestSubstats(mainStatName: string, relicType: RelicType, character:
  * Generate a perfect relic for a character based on their preferences
  * @param relicType The type of relic to generate
  * @param character The character data to use for generating the perfect relic
+ * @param store The application store containing all characters and relics
  * @returns A perfect relic object for the character
  */
-export function generatePerfectRelic(relicType: RelicType, character: Character, store: AppStore): Relic {
-  const { getCurrentWeightPreset, generateRelicId, getRelicMainStatValue } = characterUtils();
-  const currentWeight = getCurrentWeightPreset(character.id, store);
-  if (!currentWeight){
-    throw new Error('Invalid character ID');
-  }
+export function generatePerfectRelic(relicType: RelicType, weight: WeightPreset): Relic {
+  const { generateRelicId, getRelicMainStatValue } = characterUtils();
 
   // Find the best main stat for this relic type
-  const mainStatName = findBestMainStat(relicType, character, store);
+  const mainStatName = findBestMainStat(relicType, weight);
   
   // Find the best substats for this relic
-  const substats = findBestSubstats(mainStatName, relicType, character, store);
+  const substats = findBestSubstats(mainStatName, relicType, weight);
   
   let newSet = '';
 
   const isOrnament : boolean = relicType === 'Orb' || relicType === 'Rope';
   if (isOrnament) {
-    if (currentWeight.sets.ornament && currentWeight.sets.ornament.length > 0) {
-      newSet = currentWeight.sets.ornament[0]; 
+    if (weight.sets.ornament && weight.sets.ornament.length > 0) {
+      newSet = weight.sets.ornament[0]; 
     }
   } else {
-    if (currentWeight.sets.relic && currentWeight.sets.relic.length > 0) {
-      newSet = currentWeight.sets.relic[0];
+    if (weight.sets.relic && weight.sets.relic.length > 0) {
+      newSet = weight.sets.relic[0];
     }
   }
 
@@ -377,6 +364,31 @@ export function generatePerfectRelic(relicType: RelicType, character: Character,
     mainStat: { name: mainStatName, value: value },
     subStats: substats
   };
+}
+
+export function generatePerfectRelicsforWeightPreset(weightPreset: WeightPreset): WeightPreset {
+  // Create a deep copy of the weight preset to avoid modifying the original
+  const updatedPreset: WeightPreset = {
+    ...weightPreset,
+    perfectRelics: {}
+  };
+  
+  // Generate perfect relics for each relic type
+  const relicTypes: RelicType[] = ['Head', 'Hand', 'Chest', 'Feet', 'Orb', 'Rope'];
+  
+  for (const relicType of relicTypes) {
+    // Generate a perfect relic for this type based on the weight preset
+    const perfectRelic = generatePerfectRelic(relicType, weightPreset);
+    
+    // Add the perfect relic to the updated preset
+    if (!updatedPreset.perfectRelics) {
+      updatedPreset.perfectRelics = {};
+    }
+    
+    updatedPreset.perfectRelics[relicType] = perfectRelic;
+  }
+  
+  return updatedPreset;
 }
 
 /**

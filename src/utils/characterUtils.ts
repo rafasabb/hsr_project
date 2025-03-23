@@ -4,6 +4,7 @@ import gameData from '../data/gameData.json';
 import characterData from '../data/characterData.json';
 import aliasData from '../data/aliasData.json';
 import relicData from '../data/relicData.json';
+import { generatePerfectRelicsforWeightPreset } from './relicScoring';
 
 /**
  * Calculates the score for a character based on the provided relics.
@@ -43,12 +44,13 @@ const createCharacter = (characterID: string): Character => {
     path: characterGameDataEntry.path,
     element: characterGameDataEntry.element,
     baseStats: BaseStats,
-    defaultWeights,
+    defaultWeights: generatePerfectRelicsforWeightPreset(defaultWeights),
     weightPresets: [],
     activePresetId: defaultWeights.id,
     equippedRelics: {}
   };
-
+  console.log(newCharacter);
+  
   return newCharacter;
 };
 
@@ -107,7 +109,10 @@ const addWeightPreset = (characterID: string, weightPreset: WeightPreset, store:
   const presetExists = character.weightPresets.find((preset) => preset.name === weightPreset.name);
   if (presetExists) return character;
   
-  character.weightPresets.push(weightPreset);
+  // Generate perfect relics for the new weight preset
+  const presetWithPerfectRelics = generatePerfectRelicsforWeightPreset(weightPreset);
+  
+  character.weightPresets.push(presetWithPerfectRelics);
   return character
 };
 
@@ -162,13 +167,26 @@ const updateWeightPreset = (characterID: string, weightPreset: WeightPreset, sto
   const presetIndex = character.weightPresets.findIndex((preset) => preset.id === weightPreset.id); 
   if (presetIndex === -1) return;
 
-  character.weightPresets[presetIndex] = weightPreset;
+  // Generate perfect relics for the updated weight preset
+  const presetWithPerfectRelics = generatePerfectRelicsforWeightPreset(weightPreset);
+  
+  character.weightPresets[presetIndex] = presetWithPerfectRelics;
   return character; 
 }
 
 const getCurrentWeightPreset = (characterID: string, store: AppStore): WeightPreset | undefined => {
   const character = getCharacterByID(characterID, store);
   if (!character || !character.defaultWeights) return undefined; 
+  
+  const isDefaultPreset = character.activePresetId === character.defaultWeights.id;
+  if (isDefaultPreset) return character.defaultWeights;
+
+  const activePreset = character.weightPresets.find((preset) => preset.id === character.activePresetId);
+  if (!activePreset) return undefined;
+
+  return activePreset;
+}
+const getCurrentWeightFromCharacter = (character: Character): WeightPreset | undefined => {
   
   const isDefaultPreset = character.activePresetId === character.defaultWeights.id;
   if (isDefaultPreset) return character.defaultWeights;
@@ -219,6 +237,7 @@ export default function characterUtils() {
     removeWeightPreset,
     updateWeightPreset,
     getCurrentWeightPreset,
+    getCurrentWeightFromCharacter,
     setActivePreset,
     getRelicMainStatValue,
     generateRelicId

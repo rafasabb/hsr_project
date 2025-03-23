@@ -3,16 +3,14 @@ import { useStore } from '../store/StoreContext';
 import { Character, RelicType } from '../types';
 import relicData from '../data/relicData.json';
 import CharacterSelectionModal from '../components/CharacterSelectionModal';
-import { FiTrash2, FiInfo } from 'react-icons/fi';
+import { FiTrash2 } from 'react-icons/fi';
 
 export default function CharactersPage() {
-  const { store, addCharacter, updateCharacter, deleteCharacter, equipRelic, unequipRelic } = useStore();
-  // No longer need selectedCharacterName state as characters are added directly from modal
+  const { store, deleteCharacter, equipRelic, unequipRelic } = useStore();
+
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [characterToDelete, setCharacterToDelete] = useState<string | null>(null);
-  const [isWeightsModalOpen, setIsWeightsModalOpen] = useState(false);
-  const [editingCharacter, setEditingCharacter] = useState<Character | null>(null);
   
   const { relicTypes } = relicData;
   
@@ -99,7 +97,8 @@ export default function CharactersPage() {
       </div>
       
       {/* Character Selection Modal */}
-      <CharacterSelectionModal 
+      <CharacterSelectionModal
+        store={store}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         existingCharacters={store.characters}

@@ -1,8 +1,25 @@
-import AddRelicForm from '../components/AddRelicForm';
-import RelicsList from '../components/RelicsList';
-import ImportRelicForm from '../components/ImportRelicForm';;
+import { useState } from 'react';
+import AddRelicForm from '../components/relics/AddRelicForm';
+import ImportRelicForm from '../components/relics/ImportRelicForm';
+import RelicsTable from '../components/relics/RelicsTable';
+import RelicModal from '../components/relics/RelicModal';
+import { useStore } from '../store/StoreContext';
+import { Relic } from '../types';
 
 export default function RelicsPage() {
+  const { store } = useStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRelic, setSelectedRelic] = useState<Relic | null>(null);
+  const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(null);
+  
+  const handleRelicClick = (relic: Relic) => {
+    setSelectedRelic(relic);
+    setIsModalOpen(true);
+  };
+  
+  const selectedCharacter = selectedCharacterId
+    ? store.characters.find(c => c.id === selectedCharacterId)
+    : null;
 
   return (
     <div className="container mx-auto p-4">
@@ -17,8 +34,21 @@ export default function RelicsPage() {
         
         {/* Relics List - Main Content */}
         <div className="flex-grow">
-          <RelicsList />
+          <RelicsTable 
+            store={store} 
+            onRelicClick={handleRelicClick}
+            onCharacterSelect={setSelectedCharacterId}
+            selectedCharacterId={selectedCharacterId}
+          />
         </div>
+        
+        {/* Relic Modal */}
+        <RelicModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          relic={selectedRelic}
+          selectedCharacter={selectedCharacter}
+        />
       </div>
     </div>
   );

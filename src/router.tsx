@@ -3,6 +3,7 @@ import { StoreProvider } from './store/StoreContext';
 import App from './App';
 import CharactersPage from './pages/CharactersPage';
 import RelicsPage from './pages/RelicsPage';
+import Relics2Page from './pages/Relics2Page';
 import DashboardPage from './pages/DashboardPage';
 import CustomizePage from './pages/CustomizePage';
 
@@ -34,6 +35,12 @@ const relicsRoute = createRoute({
   component: RelicsPage,
 });
 
+const relics2Route = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/relics2',
+  component: Relics2Page,
+});
+
 // Create the route tree using our routes
 const customizeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -46,6 +53,7 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   charactersRoute,
   relicsRoute,
+  relics2Route,
   customizeRoute,
 ]);
 
